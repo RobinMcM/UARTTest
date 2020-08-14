@@ -4,14 +4,13 @@
    .RedDiv {  border: 5px outset red;  background-color: red;  text-align: center; width: 100:px }
    .YellowDiv {  border: 5px outset red;  background-color: yellow;  text-align: center; }
    .BlueDiv {  border: 5px outset red;  background-color: blue;  text-align: center; }
-</style>
+ </style>
  </head>
  <body> 
-     <script src="https://www.espruino.com/js/uart.js"></script>
+  <script src="https://www.espruino.com/js/uart.js"></script>
   <div class="RedDiv">
       <button onclick="UART.write('LED1.set();\n');">LED 1 On!</button>
-   <button onclick="UART.write('LED1.reset();\n');">LED1 Off!</button>
-  </div>
+      <button onclick="UART.write('LED1.reset();\n');">LED1 Off!</button>
   </div>
    <div class="YellowDiv">
        <button onclick="UART.write('LED2.set();\n');">LED 2 On!</button>
