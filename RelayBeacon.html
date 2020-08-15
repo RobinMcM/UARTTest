@@ -1,4 +1,4 @@
-y<html>
+<html>
  <head>
   <title>Relay Beacon Configuration</title>
   <meta name="viewport" content="width=620, initial-scale=1">
@@ -6,7 +6,7 @@ y<html>
    .RedDiv {  width:200px; margin: auto; border: 3px solid #ff4000; text-align: center; }
    .GreenDiv {   width:200px; margin: auto; border: 3px solid #00FF00; text-align: center; }
    .BlueDiv {   width:200px; margin: auto; border: 3px solid #0000FF; text-align: center; }
-   .Greyiv {   width:200px; margin: auto; border: 3px solid grey; text-align: center; }
+   .GrayDiv {   width:200px; margin: auto; border: 3px solid #F5F5F5; text-align: center; }
  </style>
  </head>
  <body style="width:620px;height:450px">
@@ -62,7 +62,7 @@ function getData() {
        <button onclick="UART.write('LED3.set();\n');">LED 3 On!</button>
        <button onclick="UART.write('LED3.reset();\n');">LED 3 Off!</button>
   </div>
-  <div class="GreyDiv">
+  <div class="GrayDiv">
        <button onclick="getData()">Download Data</button>
   </div>
  </body>
