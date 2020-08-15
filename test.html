@@ -1,18 +1,37 @@
 <html>
  <head>
-  <title>Dashboard</title>
-  <meta name="viewport" content="width=620, initial-scale=1">
  </head>
- <body style="width:620px;height:450px">
-  <link href="https://espruino.github.io/TinyDash/tinydash.css" rel="stylesheet">
-  <script src="https://espruino.github.io/TinyDash/tinydash.js"></script>
-  <script src="https://www.puck-js.com/puck.js"></script>  
+ <body>
+  <script src="https://www.espruino.com/js/uart.js"></script>
   <script>
-  var elements = {
-    heading : TD.label({x:10,y:10,width:190,height:50,label:"My Dashboard"})
-  }
-  for (var i in elements)
-    document.body.appendChild(elements[i]);
+// Output debug info about received data to the console
+UART.debug=3;
+
+// Save the CSV file to disk
+function saveFile(csvText, fileName) {
+  var saver = document.createElement("a");
+  var blob = new Blob([csvText], {type : 'text/csv'});
+  var blobURL = saver.href = URL.createObjectURL(blob),
+      body = document.body;
+  saver.download = fileName;
+  body.appendChild(saver);
+  saver.dispatchEvent(new MouseEvent("click"));
+  body.removeChild(saver);
+  URL.revokeObjectURL(blobURL);
+}
+
+// Actually get the data from Espruino
+function getData() {
+  UART.write('\x03\x10getData()\n', function(data) {
+    console.log("Received",JSON.stringify(data));
+    // If getData uses console.log rather than Bluetooth.println,
+    // it'll cause a prompt to be written at the end of the output
+    // we detect that here are remove it.
+    if (data.endsWith(">")) data = data.slice(0,-1);
+    saveFile(data,"info.csv");
+  });
+}
   </script>
+  <button onclick="getData()">Download Data</button>
  </body>
 </html>
